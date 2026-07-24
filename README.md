@@ -4,7 +4,7 @@
 2. Cole o SVG no SVGR (https://react-svgr.com/playground/?native=true) com o React Native selecionado. Então, copie o código gerado pelo site (SVG adaptado para o React Native).
 3. Faça correções necessárias.
 3.5: Elementos não existentes no react-native:
-         <filter>
+         filter
          <feFlood>
          <feBlend>
          <feOffset>
