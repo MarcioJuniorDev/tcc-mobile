@@ -1,5 +1,6 @@
 import * as React from "react"
 import Svg, { G, Path, Rect, Ellipse, Image } from "react-native-svg"
+import { router } from "expo-router";
 const Component_Welcome = (props) => (
     <Svg
         xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +141,7 @@ const Component_Welcome = (props) => (
         />
 
         {/* figura: fundo verde de "Cadastro" */}
-        <Rect width={251} height={54} x={217} y={1347} fill="#606C38" rx={27} />
+        <Rect width={251} height={54} x={217} y={1347} fill="#606C38" rx={27} onPress={() => router.replace("/signup")} />
 
         {/* texto: "Cadastro" */}
         <Path
