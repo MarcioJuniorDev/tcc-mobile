@@ -6,6 +6,7 @@
 3.1: mude as props de <Svg>  *width* e *height* para `width='100%', height='100%'`. Além disso, adicione a prop `viewBox="0 0 704 1524"`
 3.5: Elementos não existentes no react-native:
          filter
+         cadastro
          feFlood
          feBlend
          feOffset
