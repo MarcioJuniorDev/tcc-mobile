@@ -24,3 +24,5 @@
 - index.jsx: tela inicial (figma: Iphone 17 - 12)
 - home.jsx: bem vindo (figma: Iphone 17 - 1)
 - signup.jsx: cadastro (figma: Iphone 17 - 2)
+- signin.jsx: login (figma: Iphone 17 - 3)
+- home: home (figma: Iphone 17 - 4)
