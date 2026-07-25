@@ -107,6 +107,7 @@ export default function Home() {
 
         {/* figura: fundo do botão "Logar" */}
         <Rect
+          onPress={() => router.push("/home")}
           width={223}
           height={47}
           x={235.867}

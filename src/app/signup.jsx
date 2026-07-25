@@ -184,6 +184,7 @@ export default function Home() {
 
         {/* figura: fundo "Cadastro" */}
         <Rect
+          onPress={() => router.push("/home")}
           width={223}
           height={47}
           x={238.867}
