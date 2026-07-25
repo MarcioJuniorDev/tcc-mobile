@@ -274,6 +274,15 @@ export default function Home() {
           height={58}
           href={require("../assets/img/google-icone.jpg")}
         />
+
+        {/* imagem: logo "Localiza aqui" */}
+        <Image
+          x={400}
+          y={181}
+          width={104}
+          height={148}
+          href={require("../assets/img/logo-localiza-aqui.png")}
+        />
       </Svg>
 
       {/* INPUTS */}
