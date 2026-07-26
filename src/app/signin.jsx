@@ -1,7 +1,7 @@
 import Svg, { Path, Rect, Circle, ClipPath, Image, Defs, G } from "react-native-svg";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from 'react';
-import { Pressable, TextInput, View } from "react-native";
+import { Pressable, TextInput, View, Alert } from "react-native";
 import { router } from "expo-router";
 
 export default function Home() {
@@ -9,6 +9,27 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [cpf, setCpf] = useState("");
+
+  function fnCamposPreenchidos()
+  {
+    if (email.trim() == "" || senha.trim() == "")
+    {
+      Alert.alert(
+            "Preencha os campos",
+            "Email ou senha não informados.",
+            [
+                {
+                    text: "Ok",
+                    style: "cancel",
+                }
+            ]
+        );
+    }
+    else
+    {
+      router.push("/home");
+    }
+  }
 
   const [mostrar_senha, setMostrar_senha] = useState(false);
 
@@ -107,7 +128,7 @@ export default function Home() {
 
         {/* figura: fundo do botão "Logar" */}
         <Rect
-          onPress={() => router.push("/home")}
+          onPress={fnCamposPreenchidos}
           width={223}
           height={47}
           x={235.867}

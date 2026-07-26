@@ -26,3 +26,22 @@
 - signup.jsx: cadastro (figma: Iphone 17 - 2)
 - signin.jsx: login (figma: Iphone 17 - 3)
 - home: home (figma: Iphone 17 - 4)
+
+# Rotas
+
+index.jsx -> /welcome -> welcome.jsx (auto)
+welcome.jsx -> /signin -> signin.jsx (login)
+welcome.jsx -> /signup -> signup.jsx (cadastro)
+signin.jsx -> /home -> home.jsx (logar)
+signin.jsx -> /signup -> signup.jsx (Não tem uma conta?)
+signup.jsx -> /signin -> signin.jsx (Já tem uma conta?)
+signup.jsx -> /home -> home.jsx (cadastro)
+
+barra navegação:
+
+1 (casa) -> /home -> home.jsx
+2 (lupa) -> /pesquisa -> pesquisa.jsx
+3 (mercado) -> /mercados -> mercados.jsx
+4 (carrinho) -> /adicionar -> adicionar.jsx
+5 (coração) -> /favoritos -> favoritos.jsx
+6 (pessoa) -> /perfil -> perfil.jsx

@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import Svg, { G, Path, Rect, Ellipse, Image, Circle, Pattern, Use, LinearGradient, Stop, Defs, ClipPath } from "react-native-svg"
-import { router } from "expo-router";
 import { BarraNavegacao } from "../components/barraNavegação";
 import { useState, useEffect } from 'react';
 
