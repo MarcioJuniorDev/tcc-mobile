@@ -31,7 +31,7 @@ export default function Pesquisa() {
             JSON.stringify(novoHistorico)
         );
 
-        setHistorico(novoHistorico);
+        carregarHistorico();
     }
 
     async function removerLocal(local) {
@@ -42,8 +42,26 @@ export default function Pesquisa() {
             JSON.stringify(novoHistorico)
         );
 
-        setHistorico(novoHistorico);
+        carregarHistorico();
     }
+
+    async function carregarHistorico() {
+        try {
+            const dados = await AsyncStorage.getItem("historicoLocal");
+
+            if (dados) {
+                setHistorico(JSON.parse(dados));
+            } else {
+                setHistorico([]);
+            }
+        } catch (erro) {
+            console.log("Erro ao carregar histórico:", erro);
+        }
+    }
+
+    useEffect(() => {
+        carregarHistorico();
+    }, []);
     return (
         <View style={{ flex: 1 }}>
             <Svg

@@ -10,23 +10,32 @@ export default function Home() {
   const [senha, setSenha] = useState("");
   const [cpf, setCpf] = useState("");
 
-  function fnCamposPreenchidos()
-  {
-    if (email.trim() == "" || senha.trim() == "")
-    {
+  function fnCamposPreenchidos() {
+    if (email.trim() == "" || senha.trim() == "") {
       Alert.alert(
-            "Preencha os campos",
-            "Email ou senha não informados.",
-            [
-                {
-                    text: "Ok",
-                    style: "cancel",
-                }
-            ]
-        );
+        "Preencha os campos",
+        "Email ou senha não informados.",
+        [
+          {
+            text: "Ok",
+            style: "cancel",
+          }
+        ]
+      );
     }
-    else
-    {
+    else if (senha.trim().length < 8) {
+      Alert.alert(
+        "Senha muito curta",
+        "Sua senha deve conter ao menos 8 caracteres.",
+        [
+          {
+            text: "Ok",
+            style: "cancel",
+          }
+        ]
+      );
+    }
+    else {
       router.push("/home");
     }
   }
