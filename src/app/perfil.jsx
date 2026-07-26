@@ -1,4 +1,4 @@
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Text, Alert } from "react-native";
 import Svg, { G, Path, Rect, Ellipse, Image, Circle, Pattern, Use, LinearGradient, Stop, Defs, ClipPath } from "react-native-svg"
 import { router } from "expo-router";
 import { BarraNavegacao } from "../components/barraNavegação";
@@ -7,6 +7,46 @@ import { useState } from "react";
 export default function Home() {
     const [localizacao, setLocalizacao] = useState("");
     const [nivel, setNivel] = useState("prata");
+
+    function fnSair() {
+        Alert.alert(
+            "Sair",
+            "Tem certeza que deseja sair da conta?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel",
+                },
+                {
+                    text: "Sair",
+                    style: "destructive",
+                    onPress: () => {
+                        router.replace("/welcome")
+                    },
+                },
+            ]
+        );
+    }
+
+    function fnExcluirConta() {
+        Alert.alert(
+            "Excluir conta",
+            "Esta ação é permanente e não poderá ser desfeita. Deseja continuar?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel",
+                },
+                {
+                    text: "Excluir",
+                    style: "destructive",
+                    onPress: async () => { 
+                        router.replace("/welcome")
+                    },
+                },
+            ]
+        );
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -112,6 +152,7 @@ export default function Home() {
 
                 {/* figura: fundo do botão "Sair da conta" */}
                 <Rect
+                    onPress={fnSair}
                     width={209}
                     height={52}
                     x={130}
@@ -130,6 +171,7 @@ export default function Home() {
 
                 {/* figura: fundo do botão "Excluir a conta" */}
                 <Rect
+                    onPress={fnExcluirConta}
                     width={209}
                     height={52}
                     x={396}

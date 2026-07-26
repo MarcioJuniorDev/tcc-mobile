@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useState } from 'react';
-import { Pressable, TextInput, View } from "react-native";
+import { Pressable, TextInput, View, Alert } from "react-native";
 import Svg, { Circle, ClipPath, Defs, Image, Path, Rect, G } from "react-native-svg";
 import { router } from "expo-router";
 
@@ -34,6 +34,51 @@ export default function Home() {
       setImagem(resultado.assets[0]);
     }
   };
+
+  function fnCamposPreenchidos() {
+    if (email.trim() == "" || senha.trim() == "" || nome.trim() == "") {
+      Alert.alert(
+        "Preencha os campos",
+        "Nome, email ou senha não informados.",
+        [
+          {
+            text: "Ok",
+            style: "cancel",
+          }
+        ]
+      );
+    }
+    else {
+      if (confirmar_senha != senha) {
+        Alert.alert(
+        "Senhas diferentes",
+        "Sua senha e confirmação de senha estão diferentes.",
+        [
+          {
+            text: "Ok",
+            style: "cancel",
+          }
+        ]
+      );
+      }
+      else if (senha.length < 8)
+      {
+        Alert.alert(
+        "Senha muito curta",
+        "Sua senha deve conter ao menos 8 caracteres.",
+        [
+          {
+            text: "Ok",
+            style: "cancel",
+          }
+        ]
+      );
+      }
+      else {
+        router.push("/home");
+      }
+    }
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -184,7 +229,7 @@ export default function Home() {
 
         {/* figura: fundo "Cadastro" */}
         <Rect
-          onPress={() => router.push("/home")}
+          onPress={fnCamposPreenchidos}
           width={223}
           height={47}
           x={238.867}
