@@ -114,6 +114,11 @@ export default function Produto_pesquisado() {
 
             setCarrinho(novoCarrinho);
             setProdutoNoCarrinho(true);
+            const produtoAtualizado = novoCarrinho.find(
+                item => item.nome === produto.nome
+            );
+
+            setQuantidadeCarrinho(produtoAtualizado.quantidade);
 
         } catch (error) {
             console.log("Erro ao adicionar ao carrinho:", error);
@@ -136,6 +141,7 @@ export default function Produto_pesquisado() {
     useEffect(() => {
         carregarCarrinho();
         verificarCarrinho(pesquisa);
+        carregarQuantidade();
     }, [pesquisa]);
 
     // verificação se produto ja existe no carrinho
@@ -152,6 +158,27 @@ export default function Produto_pesquisado() {
         );
 
         setProdutoNoCarrinho(existe);
+    }
+
+    // mostrar quantidade do produto no carrinho
+    const [quantidadeCarrinho, setQuantidadeCarrinho] = useState(0);
+
+    async function carregarQuantidade() {
+        const dados = await AsyncStorage.getItem("carrinho");
+
+        const carrinho = dados
+            ? JSON.parse(dados)
+            : [];
+
+        const produto = carrinho.find(
+            item => item.nome === pesquisa
+        );
+
+        if (produto) {
+            setQuantidadeCarrinho(produto.quantidade);
+        } else {
+            setQuantidadeCarrinho(0);
+        }
     }
 
     return (
@@ -312,22 +339,9 @@ export default function Produto_pesquisado() {
                 ))}
                 {/* fundo do "Adicionar carrinho" */}
                 <G onPress={() => {
-                    if (!produtoNoCarrinho) {
-                        adicionarCarrinho({
-                            nome: pesquisa
-                        });
-                    } else {
-                        Alert.alert(
-                            "Produto no carrinho",
-                            "Este produto já está na sua lista de compras.",
-                            [
-                                {
-                                    text: "Ok",
-                                    style: "cancel",
-                                }
-                            ]
-                        );
-                    }
+                    adicionarCarrinho({
+                        nome: pesquisa
+                    });
                 }}>
                     <Rect
                         x={117}
@@ -367,7 +381,14 @@ export default function Produto_pesquisado() {
                     left: 65,
                 }}
             >{pesquisa}</Text>
-
+            {/* quantidade desse produto no carrinho */}
+            <Text style={{
+                position: 'absolute',
+                top: 800,
+                left: 235
+            }}>
+                ( {quantidadeCarrinho} )
+            </Text>
         </View>
     );
 }
