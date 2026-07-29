@@ -4,8 +4,10 @@ import { useLocalSearchParams } from "expo-router";
 import { BarraNavegacao } from '../components/barraNavegação'
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 
 export default function Produto_pesquisado() {
+    // produto pesquisado
     const { pesquisa } = useLocalSearchParams();
 
     const [registros, setRegistros] = useState([
@@ -321,7 +323,14 @@ export default function Produto_pesquisado() {
                             />
                         </G>
 
-                        <G onPress={() => { router.push("/mapa") }}>
+                        <G onPress={() =>
+                            router.push({
+                                pathname: "/mapa",
+                                params: {
+                                    mercado: registro.mercado,
+                                },
+                            })
+                        }>
                             {/* fundo de ver no mapa */}
                             <Rect width={185} height={33} x={120} y={570} fill="#DDA15E" rx={8} />
 
