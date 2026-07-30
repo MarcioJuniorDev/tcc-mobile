@@ -39,6 +39,7 @@ signup.jsx -> /home -> home.jsx (cadastro)
 pesquisa.jsx -> /produto-pesquisado -> produto-pesquisado.jsx
 produto-pesquisados.jsx -> /mercados -> mercados.jsx
 produto-pesquisado -> /mapa -> mapa.jsx
+favoritos.jsx -> /mapa -> mapa.jsx
 
 barra navegação:
 

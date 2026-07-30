@@ -17,8 +17,8 @@ export default function Mapa() {
             longitude: -46.72213593222252,
         },
         "Extra": {
-            latitude: -23.448623547364953,
-            longitude: -46.73508735403294,
+            latitude: -23.449098438026972,
+            longitude: -46.73500870955093,
         },
         "Sonda": {
             latitude: -23.441395756839984,
