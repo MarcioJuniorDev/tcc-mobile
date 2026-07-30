@@ -3,6 +3,7 @@ import { View, Text, Pressable } from "react-native";
 import { BarraNavegacao } from '../components/barraNavegação'
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { router } from "expo-router";
 
 export default function Favoritos() {
     const [carrinho, setCarrinho] = useState([]);
@@ -202,7 +203,13 @@ export default function Favoritos() {
                     href={require("../assets/img/icone-carrinho-2.png")}
                 />
 
-                <G onPress={() => { router.push("/mapa") }}>
+                <G onPress={() =>
+                    router.push({
+                        pathname: "/mapa",
+                        params: {
+                            mercado: "Assaí",
+                        },
+                    })}>
                     {/* fundo ver no mnapa assai */}
                     <Rect width={185} height={33} x={395} y={1157} fill="#DDA15E" rx={8} />
                     {/* fundo ver no mapa assai */}
@@ -215,7 +222,13 @@ export default function Favoritos() {
                     />
                 </G>
 
-                <G onPress={() => { router.push("/mapa") }}>
+                <G onPress={() =>
+                    router.push({
+                        pathname: "/mapa",
+                        params: {
+                            mercado: "Extra",
+                        },
+                    })}>
                     {/* fundo ver no mapa extra */}
                     <Rect width={185} height={33} x={395} y={1242} fill="#DDA15E" rx={8} />
                     {/* fundo ver no mapa extra */}
@@ -228,7 +241,13 @@ export default function Favoritos() {
                     />
                 </G>
 
-                <G onPress={() => { router.push("/mapa") }}>
+                <G onPress={() =>
+                    router.push({
+                        pathname: "/mapa",
+                        params: {
+                            mercado: "Sonda",
+                        },
+                    })}>
                     {/* fundo ver no mapa sonda */}
                     <Rect width={185} height={33} x={395} y={1328} fill="#DDA15E" rx={8} />
                     {/* fundo ver no mapa sonda */}
@@ -275,19 +294,21 @@ export default function Favoritos() {
                     currency: "BRL"
                 })}
             </Text>
-            {carrinho.map((item, index) => (
-                <View key={index} style={{ position: 'absolute', top: 300 + 50 * index, left: 100 }}>
-                    <Text>{item.nome}</Text>
-                    <Text>Quantidade: {item.quantidade}</Text>
-                    <Pressable onPress={() => removerProduto(item.nome)} style={{
-                        left: 180,
-                        top: -25
-                    }}>
-                        <Text>X</Text>
-                    </Pressable>
-                </View>
-            ))}
+            {
+                carrinho.map((item, index) => (
+                    <View key={index} style={{ position: 'absolute', top: 300 + 50 * index, left: 100 }}>
+                        <Text>{item.nome}</Text>
+                        <Text>Quantidade: {item.quantidade}</Text>
+                        <Pressable onPress={() => removerProduto(item.nome)} style={{
+                            left: 180,
+                            top: -25
+                        }}>
+                            <Text>X</Text>
+                        </Pressable>
+                    </View>
+                ))
+            }
             <BarraNavegacao />
-        </View>
+        </View >
     );
 }
