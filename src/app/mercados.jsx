@@ -298,76 +298,31 @@ export default function Mercados() {
                 />
             </Svg>
 
+                {/* endereço atual */}
+                <Text style={{position: 'absolute', top: 325, left: 95, fontSize: 10}}>
+                    {endereco.street + ', ' + endereco.streetNumber + ' - ' + endereco.district + ', ' + endereco.city + ' - ' + endereco.region + ', ' + endereco.postalCode}
+                </Text>
 
-            {/* <Text
-                style={{
-                    fontSize: 24,
-                    fontWeight: "bold",
-                    marginBottom: 20,
-                }}
-            >
-                Sua localização
-            </Text>
-
-            <Text>
-                Logradouro: {endereco.street || "Não encontrado"}
-            </Text>
-
-            <Text>
-                Número: {endereco.streetNumber || "S/N"}
-            </Text>
-
-            <Text>
-                Bairro: {endereco.district || "Não encontrado"}
-            </Text>
-
-            <Text>
-                Cidade: {endereco.city || "Não encontrado"}
-            </Text>
-
-            <Text>
-                Estado: {endereco.region || "Não encontrado"}
-            </Text>
-
-            <Text>
-                CEP: {endereco.postalCode || "Não encontrado"}
-            </Text>
-
-            <Text>
-                País: {endereco.country || "Não encontrado"}
-            </Text>
-
-            <Text
-                style={{
-                    fontSize: 24,
-                    fontWeight: "bold",
-                    marginTop: 40,
-                    marginBottom: 20,
-                }}
-            >
-                Distância até os mercados
-            </Text>
-
-            <Text style={{ fontSize: 18, marginBottom: 15 }}>
-                Assaí:{" "}
+            {/* distancia Assai */}
+            <Text style={{ fontSize: 18, position: 'absolute', top: 415, left: 90 }}>
                 {distancias.assai !== null
                     ? `${(distancias.assai / 1000).toFixed(2)} km`
                     : "Calculando..."}
             </Text>
 
-            <Text style={{ fontSize: 18, marginBottom: 15 }}>
-                Extra:{" "}
+            {/* distancia Extra */}
+            <Text style={{ fontSize: 18, position: 'absolute', top: 479, left: 90 }}>
                 {distancias.extra !== null
                     ? `${(distancias.extra / 1000).toFixed(2)} km`
                     : "Calculando..."}
             </Text>
 
-            <Text style={{ fontSize: 18 }}>
-                Sonda:{" "}
+            {/* distancia Sonda */}
+            <Text style={{ fontSize: 18, position: 'absolute', top: 544, left: 90 }}>
                 {distancias.sonda !== null
                     ? `${(distancias.sonda / 1000).toFixed(2)} km`
                     : "Calculando..."}
-            </Text> */}
+            </Text>
             <BarraNavegacao />
         </View>
     );
