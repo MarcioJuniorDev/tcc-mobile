@@ -271,8 +271,8 @@ export default function Favoritos() {
             <Text
                 style={{
                     position: 'absolute',
-                    top: 685,
-                    left: 150
+                    top: 721,
+                    left: 147
                 }}
             >
                 {totalAssai.toLocaleString("pt-BR", {
@@ -283,8 +283,8 @@ export default function Favoritos() {
 
             <Text style={{
                 position: 'absolute',
-                top: 735,
-                left: 150
+                top: 774,
+                left: 142
             }}>
                 {totalExtra.toLocaleString("pt-BR", {
                     style: "currency",
@@ -294,7 +294,7 @@ export default function Favoritos() {
 
             <Text style={{
                 position: 'absolute',
-                top: 785,
+                top: 827,
                 left: 150
             }}>
                 {totalSonda.toLocaleString("pt-BR", {
