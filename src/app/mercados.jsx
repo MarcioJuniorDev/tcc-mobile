@@ -308,26 +308,26 @@ export default function Mercados() {
             </Svg>
 
             {/* endereço atual */}
-            <Text style={{ position: 'absolute', top: 345, x: 0, width: 410, textAlign: 'center' }}>
+            <Text style={{ position: 'absolute', top: 345, left: 10, width: 410, textAlign: 'center' }}>
                 {endereco.street + ', ' + endereco.streetNumber + ' - ' + endereco.district + ', ' + endereco.city + ' - ' + endereco.region + ', ' + endereco.postalCode}
             </Text>
 
             {/* distancia Assai */}
-            <Text style={{ fontSize: 18, position: 'absolute', top: 415, left: 90 }}>
+            <Text style={{ fontSize: 18, position: 'absolute', top: 435, left: 90 }}>
                 {distancias.assai !== null
                     ? `${(distancias.assai / 1000).toFixed(2)} km`
                     : "Calculando..."}
             </Text>
 
             {/* distancia Extra */}
-            <Text style={{ fontSize: 18, position: 'absolute', top: 479, left: 90 }}>
+            <Text style={{ fontSize: 18, position: 'absolute', top: 505, left: 90 }}>
                 {distancias.extra !== null
                     ? `${(distancias.extra / 1000).toFixed(2)} km`
                     : "Calculando..."}
             </Text>
 
             {/* distancia Sonda */}
-            <Text style={{ fontSize: 18, position: 'absolute', top: 544, left: 90 }}>
+            <Text style={{ fontSize: 18, position: 'absolute', top: 570, left: 92 }}>
                 {distancias.sonda !== null
                     ? `${(distancias.sonda / 1000).toFixed(2)} km`
                     : "Calculando..."}
