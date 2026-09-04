@@ -254,9 +254,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 90,
+                    left: 92,
                     // equivalente a: y
-                    top: 270,
+                    top: 285,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -271,9 +271,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 90,
+                    left: 92,
                     // equivalente a: y
-                    top: 320,
+                    top: 335,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -288,9 +288,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 90,
+                    left: 92,
                     // equivalente a: y
-                    top: 370,
+                    top: 385,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -309,7 +309,7 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     left: 300,
-                    top: 380,
+                    top: 400,
                 }}
             />
 
@@ -317,9 +317,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 90,
+                    left: 92,
                     // equivalente a: y
-                    top: 412,
+                    top: 435,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -334,9 +334,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 90,
+                    left: 92,
                     // equivalente a: y
-                    top: 462,
+                    top: 485,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
