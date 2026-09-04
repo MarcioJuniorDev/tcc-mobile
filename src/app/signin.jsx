@@ -23,7 +23,7 @@ export default function Home() {
         ]
       );
     }
-    else if ( senha.trim().length < 8 || !/[0-9]/.test(senha) || !/[^A-Za-z0-9]/.test(senha)
+    else if (senha.trim().length < 8 || !/[0-9]/.test(senha) || !/[^A-Za-z0-9]/.test(senha)
     ) {
       Alert.alert(
         "Senha inválida",
@@ -229,7 +229,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 328,
+          top: 345,
           // equivalente a: width
           width: 411,
           // equivalente a: height
@@ -247,7 +247,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 370,
+          top: 385,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -265,7 +265,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 410,
+          top: 435,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -284,7 +284,7 @@ export default function Home() {
         style={{
           position: "absolute",
           left: 300,
-          top: 425,
+          top: 445,
         }}
       />
 
