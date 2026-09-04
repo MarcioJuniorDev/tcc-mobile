@@ -181,11 +181,11 @@ export default function Adicionar() {
             </Svg>
             <BarraNavegacao />
             {/* nome do produto */}
-            <TextInput
+            <TextInput placeholder="Nome do produto"
                 style={{
                     position: "absolute",
                     left: 90,
-                    top: 323,
+                    top: 340,
                     width: 411.266,
                     height: 44.792,
                     backgroundColor: "transparent",
@@ -211,7 +211,7 @@ export default function Adicionar() {
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
                     left: 90,
                     // equivalente a: y
-                    top: 388,
+                    top: 407,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -231,7 +231,7 @@ export default function Adicionar() {
                 style={{
                     position: "absolute",
                     left: 90,
-                    top: 455,
+                    top: 477,
                     width: 110,
                     height: 50,
                 }}
