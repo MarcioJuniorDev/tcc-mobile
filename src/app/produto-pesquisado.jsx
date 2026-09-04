@@ -1,5 +1,5 @@
 import Svg, { Path, Rect, Circle, ClipPath, Image, Defs, G, Text as SvgText, Pattern, Use } from "react-native-svg";
-import { View, Text, Pressable, Alert } from "react-native";
+import { View, Text, TextInput, Pressable, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { BarraNavegacao } from '../components/barraNavegação'
 import { useEffect, useState } from "react";
@@ -383,13 +383,13 @@ export default function Produto_pesquisado() {
             </Svg>
 
             <BarraNavegacao />
-            <Text
+            <TextInput
                 style={{
                     position: "absolute",
                     top: 260,
-                    left: 65,
+                    left: 60,
                 }}
-            >{pesquisa}</Text>
+            >{pesquisa}</TextInput>
             {/* quantidade desse produto no carrinho */}
             <Text style={{
                 position: 'absolute',
