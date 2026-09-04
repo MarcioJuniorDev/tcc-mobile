@@ -386,7 +386,7 @@ export default function Produto_pesquisado() {
             <Text
                 style={{
                     position: "absolute",
-                    top: 250,
+                    top: 260,
                     left: 65,
                 }}
             >{pesquisa}</Text>
