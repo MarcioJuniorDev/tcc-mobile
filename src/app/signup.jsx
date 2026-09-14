@@ -340,7 +340,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 275,
+          top: 290,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -358,7 +358,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 320,
+          top: 335,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -376,7 +376,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 370,
+          top: 387,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -394,7 +394,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 420,
+          top: 440,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -413,7 +413,7 @@ export default function Home() {
         style={{
           position: "absolute",
           left: 300,
-          top: 432,
+          top: 455,
         }}
       />
 
@@ -424,7 +424,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 470,
+          top: 490,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -444,7 +444,7 @@ export default function Home() {
         style={{
           position: "absolute",
           left: 300,
-          top: 480,
+          top: 505,
         }}
       />
 
