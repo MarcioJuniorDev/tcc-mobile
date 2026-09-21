@@ -1,3 +1,6 @@
+# Testando o projeto
+Quando testar o projeto, rode ele no celular pelo expo go. Rodando na web ou no android studio, o frontend fica quebrado.
+
 # Transformando Figma em código
 
 1. Copie o componente no Figma como SVG (selecione componente -> botão direito -> "Copy/Paste as" -> "Copy as SVG").
