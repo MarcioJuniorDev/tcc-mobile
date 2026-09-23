@@ -20,7 +20,7 @@ export default function Adicionar() {
         mercadoRegistro,
     }) {
         const { data, error } = await supabase
-            .from(registros)
+            .from('registros')
             .insert([
                 {
                     'preço': preço,
