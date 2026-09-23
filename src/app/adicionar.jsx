@@ -1,13 +1,130 @@
-import { View, TextInput, Text, Alert } from "react-native";
+import { View, TextInput, Button, Alert } from "react-native";
 import Svg, { G, Path, Rect, Ellipse, Image, Circle, Pattern, Use, LinearGradient, Stop, Defs, ClipPath } from "react-native-svg"
 import { BarraNavegacao } from "../components/barraNavegação";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
+import { supabase } from './../../lib/supabase';
 
 export default function Adicionar() {
     const [produto, setProduto] = useState("");
     const [preco, setPreco] = useState("");
     const [mercado, setMercado] = useState("Assaí");
+    const [mercados, setMercados] = useState([]);
+
+    // função para registrar produto
+    async function criarRegistro({
+        preço,
+        likes = 0,
+        produtoRegistro,
+        usuarioRegistro,
+        mercadoRegistro,
+    }) {
+        const { data, error } = await supabase
+            .from(registros)
+            .insert([
+                {
+                    'preço': preço,
+                    likes,
+                    criado_em: new Date().toISOString(),
+                    atualizado_em: new Date().toISOString(),
+                    produtoRegistro,
+                    usuarioRegistro,
+                    mercadoRegistro,
+                },
+            ])
+            .select();
+
+        if (error) {
+            console.error('Erro ao criar registro:', error.message);
+            throw error;
+        }
+        return data[0];
+    }
+
+    const usuarioLogadoId = 1; // troque pelo id do usuário autenticado
+
+    // carrega os mercados
+    useEffect(() => {
+        async function carregarMercados() {
+            try {
+                const data = await listarMercados();
+                setMercados(data);
+                if (data.length > 0) setMercado(data[0].idMercado);
+            } catch (err) {
+                Alert.alert('Erro', 'Não foi possível carregar os mercados.');
+            }
+        }
+        carregarMercados();
+    }, []);
+
+    // lê os registros de mercados no banco de dados. Chamada pelo useEffect acima.
+    async function listarMercados() {
+        const { data, error } = await supabase
+            .from('mercados')
+            .select('idMercado, nome')
+            .order('nome');
+
+        if (error) {
+            console.error('Erro ao listar mercados:', error.message);
+            throw error;
+        }
+        return data;
+    }
+
+    const fnAddSugestão = async () => {
+        const precoNumerico = parseFloat(preco.replace(',', '.'));
+
+        if (!produto.trim()) {
+            Alert.alert('Atenção', 'Informe o nome do produto.');
+            return;
+        }
+        if (isNaN(precoNumerico) || precoNumerico <= 0) {
+            Alert.alert('Atenção', 'Informe um preço válido.');
+            return;
+        }
+        if (!mercado) {
+            Alert.alert('Atenção', 'Selecione um mercado.');
+            return;
+        }
+
+        try {
+            const idProduto = await buscarOuCriarProduto(produto);
+
+            await criarRegistro({
+                preço: precoNumerico,
+                likes: 0,
+                produtoRegistro: idProduto,
+                usuarioRegistro: usuarioLogadoId,
+                mercadoRegistro: mercado,
+            });
+
+            Alert.alert('Sucesso', 'Registro salvo!');
+            setProduto('');
+            setPreco('');
+        } catch (err) {
+            Alert.alert('Erro', 'Não foi possível salvar o registro.');
+        }
+    };
+
+    async function buscarOuCriarProduto(nome) {
+        const { data: existente, error: erroBusca } = await supabase
+            .from('produtos')
+            .select('idProduto')
+            .ilike('nome', nome) // case-insensitive
+            .maybeSingle();
+
+        if (erroBusca) throw erroBusca;
+        if (existente) return existente.idProduto;
+
+        const { data: novo, error: erroCriar } = await supabase
+            .from('produtos')
+            .insert([{ nome }])
+            .select('idProduto')
+            .single();
+
+        if (erroCriar) throw erroCriar;
+        return novo.idProduto;
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -99,19 +216,7 @@ export default function Adicionar() {
 
                 {/* figura: fundo registrar */}
                 <Rect
-                    onPress={() => {
-                        Alert.alert(
-                            "Registro bem-sucedido",
-                            "Seu produto foi registrado com sucesso.",
-                            [
-                                {
-                                    text: "Ok",
-                                    style: "cancel",
-                                }
-                            ]
-                        );
-                    }
-                    }
+                    onPress={fnAddSugestão}
                     width={223}
                     height={58}
                     x={236}
@@ -181,25 +286,22 @@ export default function Adicionar() {
             </Svg>
             <BarraNavegacao />
             {/* nome do produto */}
-            <TextInput placeholder="Nome do produto"
+            <TextInput
+                placeholder="Nome do produto"
                 style={{
-                    position: "absolute",
+                    position: 'absolute',
                     left: 90,
                     top: 340,
                     width: 411.266,
                     height: 44.792,
-                    backgroundColor: "transparent",
+                    backgroundColor: 'transparent',
                     fontSize: 13,
                 }}
                 value={produto}
                 onChangeText={(texto) => {
                     const textoFormatado = texto
-                        .toLocaleLowerCase("pt-BR")
-                        .replace(
-                            /(^|\s)[\p{L}]/gu,
-                            letra => letra.toLocaleUpperCase("pt-BR")
-                        );
-
+                        .toLocaleLowerCase('pt-BR')
+                        .replace(/(^|\s)[\p{L}]/gu, (letra) => letra.toLocaleUpperCase('pt-BR'));
                     setProduto(textoFormatado);
                 }}
             />
@@ -207,29 +309,24 @@ export default function Adicionar() {
             {/* preço */}
             <TextInput
                 style={{
-                    position: "absolute",
-                    // equivalente a: x-50 (para o placeholder ficar à esqueda)
+                    position: 'absolute',
                     left: 90,
-                    // equivalente a: y
                     top: 407,
-                    // equivalente a: width
                     width: 411.266,
-                    // equivalente a: height
                     height: 44.792,
-                    backgroundColor: "transparent",
+                    backgroundColor: 'transparent',
                     fontSize: 13,
                 }}
-                value={preco} onChangeText={(texto) => {
-                    setPreco(
-                        texto.replace(/[^0-9,.]/g, "")
-                    );
-                }} placeholder="Preço do produto" keyboardType="decimal-pad"
+                value={preco}
+                onChangeText={(texto) => setPreco(texto.replace(/[^0-9,.]/g, ''))}
+                placeholder="Preço do produto"
+                keyboardType="decimal-pad"
             />
 
-            {/* mercado */}
+            {/* mercados carregados do banco */}
             <Picker
                 style={{
-                    position: "absolute",
+                    position: 'absolute',
                     left: 90,
                     top: 477,
                     width: 110,
@@ -238,9 +335,9 @@ export default function Adicionar() {
                 selectedValue={mercado}
                 onValueChange={(itemValue) => setMercado(itemValue)}
             >
-                <Picker.Item label="Assaí" value="Assaí" />
-                <Picker.Item label="Extra" value="Extra" />
-                <Picker.Item label="Sonda" value="Sonda" />
+                {mercados.map((m) => (
+                    <Picker.Item key={m.idMercado} label={m.nome} value={m.idMercado} />
+                ))}
             </Picker>
         </View >
     );
