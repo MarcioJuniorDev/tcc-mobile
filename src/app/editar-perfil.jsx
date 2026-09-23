@@ -1,19 +1,20 @@
-import { View, TextInput, Alert, Pressable } from "react-native";
-import Svg, { Path, Circle, Rect, Image, G } from "react-native-svg"
-import { router } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
-import { BarraNavegacao } from "../components/barraNavegação";
-import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as ImagePicker from "expo-image-picker";
+import { useState } from "react";
+import { Alert, Pressable, TextInput, View } from "react-native";
+import Svg, { Circle, G, Image, Path, Rect } from "react-native-svg";
+import { BarraNavegacao } from "../components/barraNavegação";
 
 export default function EditarPerfil() {
     const [nome, setNome] = useState("Rafael Lange");
     const [cpf, setCpf] = useState("");
     const [senha, setSenha] = useState("12345678");
+    const [confirmar_senha, setConfirmar_senha] = useState("");
     const [nomeUsuario, setNomeUsuario] = useState("Rafaell123");
     const [email, setEmail] = useState("rafinha@gmail.com");
-
+    const [imagem, setImagem] = useState(null);
     const [mostrarSenha, setMostrarSenha] = useState(false);
+    const [mostrar_confirmar_senha, setMostrar_confirmar_senha] = useState(false);
 
     function fnAtualizarPerfil() {
         Alert.alert(
@@ -181,6 +182,29 @@ export default function EditarPerfil() {
                     rx={7.5}
                     shapeRendering="crispEdges"
                 />
+        
+                {/* figura: fundo do input "Confirme a senha" */}
+                <Rect
+                  width={411}
+                  height={58}
+                  x={149}
+                  y={775}
+                  fill="#DDA15E"
+                  fillOpacity={0.9}
+                  rx={8}
+                  shapeRendering="crispEdges"
+                />
+        
+                {/* figura: borda do input "Confirme a senha" */}
+                <Rect
+                  width={410}
+                  height={57}
+                  x={149.5}
+                  y={775.5}
+                  stroke="#5A2A27"
+                  rx={7.5}
+                  shapeRendering="crispEdges"
+                />
 
                 {/* figura: fundo nome de usuário  */}
                 <Rect
@@ -254,9 +278,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 92,
+                    left: 90,
                     // equivalente a: y
-                    top: 285,
+                    top: 270,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -271,9 +295,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 92,
+                    left: 90,
                     // equivalente a: y
-                    top: 335,
+                    top: 320,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -288,9 +312,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 92,
+                    left: 90,
                     // equivalente a: y
-                    top: 385,
+                    top: 370,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -309,17 +333,48 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     left: 300,
-                    top: 400,
+                    top: 380,
                 }}
+            />
+
+            {/* confirmar senha */}
+            <TextInput
+              style={{
+                position: "absolute",
+                // equivalente a: x-50 (para o placeholder ficar à esqueda)
+                left: 90,
+                // equivalente a: y
+                top: 430,
+                // equivalente a: width
+                width: 411.266,
+                // equivalente a: height
+                height: 44.792,
+                backgroundColor: "transparent",
+                fontSize: 13,
+              }}
+              value={confirmar_senha} onChangeText={setConfirmar_senha} placeholder="Confirmar senha" secureTextEntry={!mostrar_confirmar_senha}
+            />
+      
+            {/* icone para mostrar/esconder confirmar senha */}
+            <MaterialCommunityIcons
+              name={mostrar_confirmar_senha ? "eye-off" : "eye"}
+              size={16}
+              color="#000"
+              onPress={() => setMostrar_confirmar_senha(!mostrar_confirmar_senha)}
+              style={{
+                position: "absolute",
+                left: 300,
+                top: 440,
+              }}
             />
 
             <TextInput
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 92,
+                    left: 90,
                     // equivalente a: y
-                    top: 435,
+                    top: 490,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
@@ -334,9 +389,9 @@ export default function EditarPerfil() {
                 style={{
                     position: "absolute",
                     // equivalente a: x-50 (para o placeholder ficar à esqueda)
-                    left: 92,
+                    left: 90,
                     // equivalente a: y
-                    top: 485,
+                    top: 540,
                     // equivalente a: width
                     width: 411.266,
                     // equivalente a: height
