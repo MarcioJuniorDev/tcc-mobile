@@ -1,6 +1,11 @@
 # Testando o projeto
 Quando testar o projeto, rode ele no celular pelo expo go. Rodando na web ou no android studio, o frontend fica quebrado.
 
+# Rotina de Atualização de Dependências
+- ```npm i```: instala o node_modules no projeto.
+- ```npx expo install --check```: verifica se há dependências para serem atualizadas do expo. Se sim, pergunta se deseja atualizar.
+- ```npm audit fix```: atualiza as dependências que estão desatualizadas.
+
 # Transformando Figma em código
 
 1. Copie o componente no Figma como SVG (selecione componente -> botão direito -> "Copy/Paste as" -> "Copy as SVG").
