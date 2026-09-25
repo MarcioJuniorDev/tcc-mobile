@@ -1,6 +1,12 @@
 # Testando o projeto
 Quando testar o projeto, rode ele no celular pelo expo go. Rodando na web ou no android studio, o frontend fica quebrado.
 
+# Baixando o projeto
+- Instale o node_modules com ```npm install```.
+- Crie um arquivo .env na raiz do projeto. Coloque as credenciais de acesso do Supabase (URL e Anon Key). Código:
+  ```EXPO_PUBLIC_SUPABASE_URL=```
+  ```EXPO_PUBLIC_SUPABASE_ANON_KEY=```
+
 # Rotina de Atualização de Dependências
 - ```npm i```: instala o node_modules no projeto.
 - ```npx expo install --check```: verifica se há dependências para serem atualizadas do expo. Se sim, pergunta se deseja atualizar.
