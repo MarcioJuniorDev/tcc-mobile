@@ -4,9 +4,9 @@ Quando testar o projeto, rode ele no celular pelo expo go. Rodando na web ou no 
 # Baixando o projeto
 - Instale o node_modules com ```npm install```.
 - Crie um arquivo .env na raiz do projeto. Coloque as credenciais de acesso do Supabase (URL e Anon Key). Código:
-  ```EXPO_PUBLIC_SUPABASE_URL=```
+  ```EXPO_PUBLIC_SUPABASE_URL=https://blkgaihocjzvqxhpalzy.supabase.co```
   
-  ```EXPO_PUBLIC_SUPABASE_ANON_KEY=```
+  ```EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsa2dhaWhvY2p6dnF4aHBhbHp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgzNzU1NzQsImV4cCI6MjEwMzk1MTU3NH0.roXabnu7p3g_aU393bBXpP0O3zyMD2fZWKZJALAWz80```
 
 # Rotina de Atualização de Dependências
 - ```npm i```: instala o node_modules no projeto.
