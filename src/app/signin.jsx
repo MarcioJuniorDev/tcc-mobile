@@ -174,19 +174,8 @@ export default function Home() {
           fillOpacity={0.9}
           rx={23.5}
           shapeRendering="crispEdges"
+          onPress={handleLogin}
         />
-
-      {/* Pressable invisível, posicionado por cima do botão desenhado no SVG */}
-      <Pressable
-        onPress={handleLogin}
-        style={{
-          position: 'absolute',
-          left: 235.867,
-          top: 1026.86,
-          width: 223,
-          height: 47,
-        }}
-      />
 
       <Path
         fill="#000"
