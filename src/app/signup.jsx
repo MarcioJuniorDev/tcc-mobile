@@ -1,9 +1,9 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from 'react';
-import { Pressable, TextInput, View, Alert } from "react-native";
-import Svg, { Circle, ClipPath, Defs, Image, Path, Rect, G } from "react-native-svg";
 import { router } from "expo-router";
+import { useState } from 'react';
+import { Alert, Pressable, TextInput, View } from "react-native";
+import Svg, { Circle, ClipPath, Defs, G, Image, Path, Rect } from "react-native-svg";
 
 export default function Home() {
   const [nome, setNome] = useState("");
@@ -11,6 +11,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmar_senha, setConfirmar_senha] = useState("");
+  const [nomeUsuario, setNomeUsuario] = useState("");
 
   const [mostrar_senha, setMostrar_senha] = useState(false);
   const [mostrar_confirmar_senha, setMostrar_confirmar_senha] = useState(false);
@@ -96,7 +97,7 @@ export default function Home() {
           width={411.266}
           height={44.792}
           x={143.867}
-          y={465.856} A
+          y={465.856}
           fill="#DDA15E"
           fillOpacity={0.9}
           rx={8}
@@ -201,6 +202,29 @@ export default function Home() {
           height={43.792}
           x={144.367}
           y={625.355}
+          stroke="#5A2A27"
+          rx={7.5}
+          shapeRendering="crispEdges"
+        />
+
+        {/* figura: fundo nome de usuário  */}
+        <Rect
+          width={411}
+          height={58}
+          x={150}
+          y={535}
+          fill="#DDA15E"
+          fillOpacity={0.9}
+          rx={8}
+          shapeRendering="crispEdges"
+         />
+
+        {/* figura: borda nome de usuário */}
+        <Rect
+          width={410}
+          height={57}
+          x={150.5}
+          y={535.5}
           stroke="#5A2A27"
           rx={7.5}
           shapeRendering="crispEdges"
@@ -340,7 +364,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 290,
+          top: 275,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -358,7 +382,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 335,
+          top: 320,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -376,7 +400,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 387,
+          top: 370,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -394,7 +418,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 440,
+          top: 420,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -413,7 +437,7 @@ export default function Home() {
         style={{
           position: "absolute",
           left: 300,
-          top: 455,
+          top: 432,
         }}
       />
 
@@ -424,7 +448,7 @@ export default function Home() {
           // equivalente a: x-50 (para o placeholder ficar à esqueda)
           left: 90,
           // equivalente a: y
-          top: 490,
+          top: 470,
           // equivalente a: width
           width: 411.266,
           // equivalente a: height
@@ -444,8 +468,25 @@ export default function Home() {
         style={{
           position: "absolute",
           left: 300,
-          top: 505,
+          top: 480,
         }}
+      />
+
+      <TextInput
+        style={{
+             position: "absolute",
+             // equivalente a: x-50 (para o placeholder ficar à esqueda)
+             left: 90,
+              // equivalente a: y
+              top: 530,
+              // equivalente a: width
+            width: 411.266,
+              // equivalente a: height
+             height: 44.792,
+              backgroundColor: "transparent",
+             fontSize: 13,
+         }}
+         value={nomeUsuario} onChangeText={setNomeUsuario} placeholder="Nome de usuário"
       />
 
       {/* "apertável" para escolher imagem */}
