@@ -1,4 +1,4 @@
-import { View, TextInput, Button, Alert } from "react-native";
+import { View, TextInput, Button, Alert, Pressable, Text } from "react-native";
 import Svg, { G, Path, Rect, Ellipse, Image, Circle, Pattern, Use, LinearGradient, Stop, Defs, ClipPath } from "react-native-svg"
 import { BarraNavegacao } from "../components/barraNavegação";
 import { useState, useEffect } from "react";
@@ -10,6 +10,31 @@ export default function Adicionar() {
     const [preco, setPreco] = useState("");
     const [mercado, setMercado] = useState("Assaí");
     const [mercados, setMercados] = useState([]);
+
+    const [textoBusca, setTextoBusca] = useState("");
+    const [produtos, setProdutos] = useState([]);
+
+    // Busca produtos a partir do que o usuário digita
+    async function buscarProdutos(texto) {
+        setTextoBusca(texto);
+
+        if (texto.trim() === "") {
+            setProdutos([]);
+            return;
+        }
+
+        const { data, error } = await supabase
+            .from("produtos")
+            .select("nome")
+            .ilike("nome", `${texto}%`);
+
+        if (error) {
+            console.error("Erro ao buscar produtos:", error);
+            return;
+        }
+
+        setProdutos(data);
+    }
 
     // função para registrar produto
     async function criarRegistro({
@@ -301,10 +326,37 @@ export default function Adicionar() {
                 onChangeText={(texto) => {
                     const textoFormatado = texto
                         .toLocaleLowerCase('pt-BR')
-                        .replace(/(^|\s)[\p{L}]/gu, (letra) => letra.toLocaleUpperCase('pt-BR'));
+                        .replace(/(^|\s)[\p{L}]/gu, (letra) =>
+                            letra.toLocaleUpperCase('pt-BR')
+                        );
+
                     setProduto(textoFormatado);
+                    buscarProdutos(textoFormatado);
                 }}
             />
+
+            {produtos.map((item, index) => (
+                <Pressable
+                    key={index}
+                    onPress={() => {
+                        setProduto(item.nome);
+                        setProdutos([]);
+                    }}
+                    style={{
+                        position: "absolute",
+                        left: 90,
+                        top: 390 + (index * 35),
+                        width: 411.266,
+                        height: 35,
+                        justifyContent: "center",
+                        backgroundColor: "#FEFAE0",
+                    }}
+                >
+                    <Text style={{ fontSize: 14 }}>
+                        {item.nome}
+                    </Text>
+                </Pressable>
+            ))}
 
             {/* preço */}
             <TextInput
