@@ -5,53 +5,122 @@ import { BarraNavegacao } from '../components/barraNavegação'
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import { supabase } from './../../lib/supabase';
 
 export default function Produto_pesquisado() {
     // produto pesquisado
     const { pesquisa } = useLocalSearchParams();
 
-    const [registros, setRegistros] = useState([
-        {
-            mercado: "Assaí",
-            curtidas: 15,
-            data: "23/07/2026",
-            preco: "29,99",
-            curtido: 'false'
-        },
-        {
-            mercado: "Extra",
-            curtidas: 13,
-            data: "23/07/2026",
-            preco: "27,90",
-            curtido: 'false'
-        },
-        {
-            mercado: "Sonda",
-            curtidas: 12,
-            data: "23/07/2026",
-            preco: "27,99",
-            curtido: 'false'
-        },
-        {
-            mercado: "Sonda",
-            curtidas: 7,
-            data: "22/07/2026",
-            preco: "12,99",
-            curtido: 'false'
-        }
-    ]);
+    const [registros, setRegistros] = useState([]);
+    const [idProduto, setIdProduto] = useState("");
+    const [mercado, setMercado] = useState("");
 
-    function curtir(index) {
+    async function buscarIdProduto() {
+        const { data, error } = await supabase
+            .from("produtos")
+            .select("idProduto")
+            .eq("nome", pesquisa)
+            .single();
+
+        if (error) {
+            console.error("Erro ao buscar produto:", error);
+            return;
+        }
+
+        setIdProduto(data.idProduto);
+    }
+
+    async function buscarRegistros(id) {
+        const { data, error } = await supabase
+            .from("registros")
+            .select("idRegistro, criado_em, preço, likes, mercadoRegistro")
+            .eq("produtoRegistro", id);
+
+        if (error) {
+            console.error("Erro ao buscar registros:", error);
+            return;
+        }
+
+        const registrosFormatados = data.map(registro => {
+            let mercado;
+
+            switch (registro.mercadoRegistro) {
+                case 1:
+                    mercado = "Assaí";
+                    break;
+
+                case 2:
+                    mercado = "Extra";
+                    break;
+
+                case 3:
+                    mercado = "Sonda";
+                    break;
+
+                default:
+                    mercado = "Desconhecido";
+            }
+
+            return {
+                ...registro,
+                mercado,
+                data: new Date(registro.criado_em).toLocaleDateString("pt-BR")
+            };
+        });
+
+        setRegistros(registrosFormatados);
+    }
+
+    async function buscarMercadoPorId() {
+        const { data, error } = await supabase
+            .from("mercados")
+            .select(idMercado)
+            .eq("nome", "mercadoRegistro")
+    }
+
+    async function curtir(index) {
+        const registro = registros[index];
+
+        console.log("REGISTRO:", registro);
+        console.log("ID:", registro?.idRegistro);
+        console.log("LIKES ATUAL:", registro?.likes);
+
+        if (!registro || !registro.idRegistro) {
+            console.error("Registro ou idRegistro não encontrado.");
+            return;
+        }
+
+        const novoCurtido = !registro.curtido;
+
+        const novasCurtidas = novoCurtido
+            ? Number(registro.likes || 0) + 1
+            : Math.max(0, Number(registro.likes || 0) - 1);
+
+        console.log("NOVOS LIKES:", novasCurtidas);
+
+        const { data, error } = await supabase
+            .from("registros")
+            .update({
+                likes: novasCurtidas
+            })
+            .eq("idRegistro", registro.idRegistro)
+            .select();
+
+        if (error) {
+            console.error("ERRO DO SUPABASE:", error);
+            return;
+        }
+
+        console.log("REGISTRO ATUALIZADO NO BANCO:", data);
+
         setRegistros(registros =>
-            registros.map((registro, i) => {
-                if (i !== index) return registro;
+            registros.map((item, i) => {
+                if (i !== index) return item;
 
                 return {
-                    ...registro,
-                    curtido: !registro.curtido,
-                    curtidas: registro.curtido
-                        ? registro.curtidas + 1
-                        : registro.curtidas - 1,
+                    ...item,
+                    curtido: novoCurtido,
+                    likes: novasCurtidas
                 };
             })
         );
@@ -141,9 +210,28 @@ export default function Produto_pesquisado() {
     }
 
     useEffect(() => {
-        carregarCarrinho();
-        verificarCarrinho(pesquisa);
-        carregarQuantidade();
+        async function carregarDados() {
+            await carregarCarrinho();
+            await verificarCarrinho(pesquisa);
+            await carregarQuantidade();
+
+            const { data, error } = await supabase
+                .from("produtos")
+                .select("idProduto")
+                .eq("nome", pesquisa)
+                .single();
+
+            if (error) {
+                console.error("Erro ao buscar produto:", error);
+                return;
+            }
+
+            setIdProduto(data.idProduto);
+
+            await buscarRegistros(data.idProduto);
+        }
+
+        carregarDados();
     }, [pesquisa]);
 
     // verificação se produto ja existe no carrinho
@@ -252,7 +340,6 @@ export default function Produto_pesquisado() {
                 {registros.map((registro, index) => (
                     <G key={index} transform={`translate(0, ${index * 150})`}>
 
-                        {/* Mercado */}
                         <SvgText
                             x={116}
                             y={505}
@@ -272,7 +359,7 @@ export default function Produto_pesquisado() {
                             fontSize={32}
                             fill="red"
                         >
-                            {registro.curtidas}
+                            {registro.likes}
                         </SvgText>
 
                         {/* Data */}
@@ -304,7 +391,7 @@ export default function Produto_pesquisado() {
                             fill="#000"
                             fontWeight="bold"
                         >
-                            R$ {registro.preco}
+                            R$ {registro.preço}
                         </SvgText>
 
 
@@ -317,8 +404,8 @@ export default function Produto_pesquisado() {
                                 height={39}
                                 href={
                                     registro.curtido
-                                        ? require("../assets/img/icone-curtir-desmarcado.png")
-                                        : require("../assets/img/icone-curtir-marcado.png")
+                                        ? require("../assets/img/icone-curtir-marcado.png")
+                                        : require("../assets/img/icone-curtir-desmarcado.png")
                                 }
                             />
                         </G>
@@ -386,7 +473,7 @@ export default function Produto_pesquisado() {
             <TextInput
                 style={{
                     position: "absolute",
-                    top: 260,
+                    top: 253,
                     left: 60,
                 }}
             >{pesquisa}</TextInput>
